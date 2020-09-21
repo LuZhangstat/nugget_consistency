@@ -1,5 +1,5 @@
  #  simultation for prediction #
-setwd("/Users/luzhang/Documents/github/nugget_consistency")
+#setwd("/Users/luzhang/Documents/github/nugget_consistency")
 rm(list = ls())
 load("./data/simdata.RData")
 source("./projects/utils_2.R")
