@@ -1,2 +1,2 @@
 # nugget_consistency
-Code for paper "Statistical analysis of the Matern model with measurement error".
+Code for paper "On identifiability and consistency of the nugget in Gaussian spatial process models".
