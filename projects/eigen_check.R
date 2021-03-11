@@ -1,4 +1,5 @@
 ## check the trend of eigenvalues ##
+# numerical check for assumption 1 & 2 #
 rm(list = ls())
 library(fields)
 library(ggplot2)
@@ -166,37 +167,3 @@ dev.off()
 
 
 
-# 
-# 
-# threehalf <- function(x) {
-#   z <- (1 + abs(x))*exp(-abs(x))
-#   return(z)
-# }
-# 
-# covmat <- function(N) {
-#   s <- matrix(, nrow = N, ncol = N)
-#   for (i in c(1:N)){
-#     for (j in c(1:N)){
-#       s[i,j] <- threehalf(i/N-j/N)
-#     }
-#   }
-#   return(s)
-# }
-# 
-# 
-# a <- rep(0, 10)
-# b <- rep(0, 10)
-# c <- rep(0, 10)
-# for (j in c(1:10)){
-#   N = j*100
-#   m <- covmat(N)
-#   e <- eigen(m)$values
-#   for (i in c(1:N)){
-#     e[i] <- e[i]/N*i^4
-#   }
-#   a[j] = e[floor(N^0.5)]
-#   b[j] = e[floor(N^0.75)]
-#   c[j] = e[floor(N^0.95)]
-# }
-# 
-# dat <-  c(rbind(a,b,c))
