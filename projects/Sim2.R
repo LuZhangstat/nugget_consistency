@@ -273,8 +273,111 @@ hist(MLE_0.5_0.2_0.4_n3[, "phi"] * MLE_0.5_0.2_0.4_n3[, "sigma2"],
 dev.off()
 
 
+####### update plots for jrssb #######
+width <- 5.0
+height <- 5.0
 
+png("./pics/fig4/a.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n1[, "tau2"], xlim = c(0, 0.4), breaks = 15,
+     main = expression({tau[0]}^2 == 0.2 ~ "," ~ n == 400), xlab = expression(tau^2))
+dev.off()
 
+png("./pics/fig4/b.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n2[, "tau2"], xlim = c(0, 0.4), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 900), xlab = expression(tau^2))
+dev.off()
+
+png("./pics/fig4/c.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n3[, "tau2"], xlim = c(0, 0.4), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 1600), xlab = expression(tau^2))
+dev.off()
+
+png("./pics/fig4/d.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n1[, "sigma2"], xlim = c(0.2, 2.5), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 400), xlab = expression(sigma^2))
+dev.off()
+
+png("./pics/fig4/e.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n2[, "sigma2"], xlim = c(0.2, 2.5), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 900), xlab = expression(sigma^2))
+dev.off()
+
+png("./pics/fig4/f.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n3[, "sigma2"], xlim = c(0.2, 2.5), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 1600), xlab = expression(sigma^2))
+dev.off()
+
+png("./pics/fig4/g.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n1[, "phi"], xlim = c(1, 21), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 400), xlab = expression(phi))
+dev.off()
+
+png("./pics/fig4/h.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n2[, "phi"], xlim = c(1, 21), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 900), xlab = expression(phi))
+dev.off()
+
+png("./pics/fig4/i.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n3[, "phi"], xlim = c(1, 21), breaks = 15,
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 1600), xlab = expression(phi))
+dev.off()
+
+png("./pics/fig4/j.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n1[, "phi"] * MLE_0.5_0.2_0.4_n1[, "sigma2"], 
+     xlim = c(1, 20), breaks = 15, xlab = expression(sigma^2 * phi),
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 400))
+dev.off()
+
+png("./pics/fig4/k.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n2[, "phi"] * MLE_0.5_0.2_0.4_n2[, "sigma2"], 
+     xlim = c(1, 20), breaks = 15, xlab = expression(sigma^2 * phi),
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 900))
+dev.off()
+
+png("./pics/fig4/l.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+hist(MLE_0.5_0.2_0.4_n3[, "phi"] * MLE_0.5_0.2_0.4_n3[, "sigma2"], 
+     xlim = c(1, 20), breaks = 15, xlab = expression(sigma^2 * phi),
+     main = expression(tau[0]^2 == 0.2 ~ "," ~ n == 1600))
+dev.off()
+
+library(grid)
+library(png)
+setwd("./pics/fig4")
+plots <- lapply(ll <- list.files(patt='*[.]png'),
+                function(x){
+                    img <- as.raster(readPNG(x))
+                    rasterGrob(img, interpolate = FALSE)
+                })
+library(ggplot2)
+library(gridExtra)
+ggsave("Figure4.pdf",width=8.5, height=11, dpi = 1000, 
+       marrangeGrob(grobs = plots, nrow=4, ncol=3, 
+                    layout_matrix = matrix(seq_len(4*3), ncol = 3, byrow = TRUE),
+                    top=NULL))
 
 
 
@@ -418,10 +521,8 @@ for (i in 1:8){
     }
 }
 
-# plot for the draft
 
-width <- 5.0
-height <- 5.0
-pointsize <- 16
+
+
 
 
