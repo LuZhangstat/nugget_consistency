@@ -459,13 +459,6 @@ ggplot(data = dfc, aes(x = sample_size, y = ratio, group = group)) +
   geom_point(aes(shape = group, color = group))
 dev.off()
 
-plots = list()
-plots[[1]] <- pa
-plots[[2]] <- pb
-plots[[3]] <- pc
-plots[[4]] <- pd
-
-
 ####### update plots for jrssb #######
 width <- 8.0
 height <- 3.0
