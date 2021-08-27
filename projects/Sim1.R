@@ -330,12 +330,13 @@ zlim = c(-1000.00, 220)
 
 width <- 5.0
 height <- 5.0
-pointsize <- 16
+
 
 setEPS()
-postscript("./pics/map-L_05_0_04.eps", width = width, height = height)
-#png(paste("./pics/map-L_05_0_04.png", sep = ""), 
-#    width = width, height = height, pointsize = pointsize, family = "Courier")
+postscript("./pics/map-L_05_0_04.eps", width = width, height = height,
+           pointsize = 1)
+# png("./pics/map-L_05_0_04.png",
+#    width = width, height = height, units = "in", res = 1000)
 par(mfrow = c(1, 1))
 i <- as.image.SpatialGridDataFrame(surf.L_0.5_0_0.4)
 plot(grid_0.5, typ = "n", cex = 0.5, xlim = xlim, axes = FALSE, 
@@ -347,7 +348,6 @@ image.plot(i, add = TRUE, col = rev(col.pal(length(surf.brks) - 1)),
 contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
         zlim = zlim)
 dev.off()
-
 
 setEPS()
 postscript("./pics/map-L_05_0_04_fix.eps", width = width, height = height)
@@ -562,3 +562,156 @@ save(list = c("L_0.5_0_0.4", "L_0.5_0_0.4_fix", "L_0.5_0_0.4_nug",
      file = "./data/sim1results.RData", 
      envir = .GlobalEnv)
 
+
+#### update plots for jrssb
+library(ggplot2)
+width = 5.0
+height = 5.0
+png("./pics/fig3/d.png",
+   width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0_0.4)
+plot(grid_0.5, typ = "n", cex = 0.5, xlim = xlim, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(tau^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+png("./pics/fig3/a.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0_0.4_fix)
+plot(grid_0.5, typ = "n", cex = 0.5, xlim = xlim, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(tau^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+png("./pics/fig3/g.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0_0.4_nug)
+plot(grid_0.5_nug, typ = "n", cex = 0.5, xlim = xlim_nug, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(sigma^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+png("./pics/fig3/e.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0.2_0.4)
+plot(grid_0.5, typ = "n", cex = 0.5, xlim = xlim, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(tau^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+png("./pics/fig3/b.png",
+    width = width, height = height, units = "in", res = 1000)
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0.2_0.4_fix)
+plot(grid_0.5, typ = "n", cex = 0.5, xlim = xlim, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(tau^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+png("./pics/fig3/h.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0.2_0.4_nug)
+plot(grid_0.5_nug, typ = "n", cex = 0.5, xlim = xlim_nug, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(sigma^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+
+png("./pics/fig3/f.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0.8_0.4)
+plot(grid_0.5, typ = "n", cex = 0.5, xlim = xlim, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(tau^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+png("./pics/fig3/c.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0.8_0.4_fix)
+plot(grid_0.5, typ = "n", cex = 0.5, xlim = xlim, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(tau^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+png("./pics/fig3/i.png",
+    width = width, height = height, units = "in", res = 1000)
+par(mfrow = c(1, 1))
+i <- as.image.SpatialGridDataFrame(surf.L_0.5_0.8_0.4_nug)
+plot(grid_0.5_nug, typ = "n", cex = 0.5, xlim = xlim_nug, axes = FALSE, 
+     ylab = expression(phi), xlab = expression(sigma^2)) 
+axis(2, las=1)
+axis(1)
+image.plot(i, add = TRUE, 
+           col = rev(col.pal(length(surf.brks) - 1)), 
+           zlim = zlim)
+contour(i$x, i$y, i$z, col = "black", add = TRUE, nlevels = 25, 
+        zlim = zlim)
+dev.off()
+
+library(grid)
+library(png)
+setwd("./pics/fig3")
+plots <- lapply(ll <- list.files(patt='*[.]png'),
+                function(x){
+                  img <- as.raster(readPNG(x))
+                  rasterGrob(img, interpolate = FALSE)
+                })
+library(ggplot2)
+library(gridExtra)
+ggsave("Figure3.pdf",width=8.5, height=11, dpi = 1000, 
+       marrangeGrob(grobs = plots, nrow=3, ncol=3, 
+                    layout_matrix = matrix(seq_len(9), ncol = 3, byrow = TRUE),
+                    top=NULL))
