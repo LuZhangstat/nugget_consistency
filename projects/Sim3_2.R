@@ -1,4 +1,4 @@
- #  simultation for prediction #
+#  simultation for prediction #
 #setwd("/Users/luzhang/Documents/github/nugget_consistency")
 rm(list = ls())
 load("./data/simdata.RData")
@@ -13,9 +13,9 @@ Sam_N_list = c(200, 400, 600, 800, 1000, 1200, 1400, 1600)
 phi = phi0.5_2; tau2 = tau22
 D_pred = D[1601:4100, 1601:4100]
 
- ##########################
+##########################
 #    simultion 3 part A    #
- ##########################
+##########################
 
 # preallocation 
 data_A_ratio1 = rep(0, length(Sam_N_list))
@@ -42,31 +42,31 @@ for (i in 1:length(Sam_N_list)){
   D_pred_obs= D[1601:4100, 1:Sam_N_list[i]]
   #(a)#
   lower_l[i] = MSPE_theta0(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, 
-                      tau2, D_obs, D_obs_pred, D_pred)
+                           tau2, D_obs, D_obs_pred, D_pred)
   # let phi1 = 2*phi 
   upper1_l[i] = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2, 
-                        phi1 = phi, sigma21 = sigma2, tau21 = 0.5 * tau2, 
-                        D_obs, D_obs_pred, D_pred_obs, D_pred)
+                             phi1 = phi, sigma21 = sigma2, tau21 = 0.5 * tau2, 
+                             D_obs, D_obs_pred, D_pred_obs, D_pred)
   
   upper2_l[i] = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2, 
-                        phi1 = phi, sigma21 = sigma2, tau21 = 2 * tau2, 
-                        D_obs, D_obs_pred, D_pred_obs, D_pred)
+                             phi1 = phi, sigma21 = sigma2, tau21 = 2 * tau2, 
+                             D_obs, D_obs_pred, D_pred_obs, D_pred)
   
   upper3_l[i] = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2, 
-                        phi1 = 2 * phi, sigma21 = sigma2, tau21 = tau2, 
-                        D_obs, D_obs_pred, D_pred_obs, D_pred)
+                             phi1 = 2 * phi, sigma21 = sigma2, tau21 = tau2, 
+                             D_obs, D_obs_pred, D_pred_obs, D_pred)
   
   upper4_l[i] = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2, 
-                        phi1 = phi, sigma21 = 2 * sigma2, tau21 = tau2, 
-                        D_obs, D_obs_pred, D_pred_obs, D_pred)
+                             phi1 = phi, sigma21 = 2 * sigma2, tau21 = tau2, 
+                             D_obs, D_obs_pred, D_pred_obs, D_pred)
   
   upper5_l[i] = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2, 
-                        phi1 = 2.0 * phi, sigma21 = 0.5 * sigma2, tau21 = tau2, 
-                        D_obs, D_obs_pred, D_pred_obs, D_pred)
+                             phi1 = 2.0 * phi, sigma21 = 0.5 * sigma2, tau21 = tau2, 
+                             D_obs, D_obs_pred, D_pred_obs, D_pred)
   
   upper6_l[i] = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2, 
-                        phi1 = 0.5 * phi, sigma21 = 2 * sigma2, tau21 = tau2, 
-                        D_obs, D_obs_pred, D_pred_obs, D_pred)
+                             phi1 = 0.5 * phi, sigma21 = 2 * sigma2, tau21 = tau2, 
+                             D_obs, D_obs_pred, D_pred_obs, D_pred)
   
   data_A_ratio1[i] = upper1_l[i] / lower_l[i]
   data_A_ratio2[i] = upper2_l[i] / lower_l[i]
@@ -104,13 +104,13 @@ for (i in 1:length(Sam_N_list2)){
   D_pred_obs= D[1601:4100, pick_ind_large]
   #(a)#
   lower_l2[i] = MSPE_theta0(N_obs = Sam_N_list2[i], N_pred = 2500, phi, sigma2, 
-                           tau2, D_obs, D_obs_pred, D_pred)
+                            tau2, D_obs, D_obs_pred, D_pred)
   cat(lower_l2[i], "\n")
-  }
+}
 
- ##########################
+##########################
 #    simultion 3 part B    #
- ##########################
+##########################
 
 # preallocation 
 data_B_ratio1 = rep(0, length(Sam_N_list))
@@ -135,7 +135,7 @@ for (i in 1:length(Sam_N_list)){
   lower1 = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2,
                         phi1 = 2 * phi, sigma21 = 0.5 * sigma2, tau21 = tau2,
                         D_obs, D_obs_pred, D_pred_obs, D_pred)
-
+  
   upper2 = MSPE_theta0(N_obs = Sam_N_list[i], N_pred = 2500, phi = phi * 0.5,
                        sigma2 = sigma2 * 2, tau2, D_obs, D_obs_pred, D_pred)
   lower2 = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2,
@@ -147,14 +147,14 @@ for (i in 1:length(Sam_N_list)){
   lower3 = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2,
                         phi1 = 1.1 * phi, sigma21 = 1.1 * sigma2, tau21 = tau2,
                         D_obs, D_obs_pred, D_pred_obs, D_pred)
-
+  
   # 3rd phi1*sigma21 < phi*sigma
   upper4 = MSPE_theta0(N_obs = Sam_N_list[i], N_pred = 2500, phi = phi * 0.9,
                        sigma2 = 0.9 * sigma2, tau2, D_obs, D_obs_pred, D_pred)
   lower4 = MSPE_theta01(N_obs = Sam_N_list[i], N_pred = 2500, phi, sigma2, tau2,
                         phi1 = 0.9 * phi, sigma21 = 0.9 * sigma2, tau21 = tau2,
                         D_obs, D_obs_pred, D_pred_obs, D_pred)
-
+  
   # 4nd check the impact of nugget
   upper5 = MSPE_theta0(N_obs = Sam_N_list[i], N_pred = 2500, phi = phi, 
                        sigma2 = sigma2, tau2 = 2.0 * tau2, D_obs, D_obs_pred, D_pred)
@@ -192,9 +192,9 @@ save(list = c("data_B_ratio1", "data_B_ratio2", "data_B_ratio3",
 
 
 
- ##########################
+##########################
 #    simultion 3 part C    #
- ##########################
+##########################
 load("./data/sim3_MLE_0.5_0.2_0.4_fix0.8phiresults.RData")
 load("./data/sim3_MLE_0.5_0.2_0.4_fix1.0phiresults.RData")
 load("./data/sim3_MLE_0.5_0.2_0.4_fix1.2phiresults.RData")
@@ -245,7 +245,7 @@ for (i in 1:length(Sam_N_list)){
                         sigma21 = Mean_MLE_0.5_0.2_0.4_fix1.0phi[i, 2], 
                         tau21 = Mean_MLE_0.5_0.2_0.4_fix1.0phi[i, 1], 
                         D_obs, D_obs_pred, D_pred_obs, D_pred)
-
+  
   upper3 = MSPE_theta0(N_obs = Sam_N_list[i], N_pred = 2500, phi = 1.2 * phi, 
                        sigma2 = Mean_MLE_0.5_0.2_0.4_fix1.2phi[i, 2], 
                        tau2 = Mean_MLE_0.5_0.2_0.4_fix1.2phi[i, 1], 
@@ -256,7 +256,7 @@ for (i in 1:length(Sam_N_list)){
                         tau21 = Mean_MLE_0.5_0.2_0.4_fix1.2phi[i, 1], 
                         D_obs, D_obs_pred, D_pred_obs, D_pred)
   
-
+  
   data_C_ratio1[i] = upper1 / lower1
   data_C_ratio2[i] = upper2 / lower2
   data_C_ratio3[i] = upper3 / lower3
@@ -280,11 +280,22 @@ width <- 8.0
 height <- 3.0
 pointsize <- 16
 
-
+load("./data/sim3_d1_a_results.RData")
 load("./data/sim3_2_a_results.RData")
 load("./data/sim3_2_b_results.RData")
 load("./data/sim3_2_c_results.RData")
 library(ggplot2)
+
+df_d1_a1 <- data.frame(
+  sample_size = Sam_N_list_d1,
+  MSPE = lower_l1)
+
+par(mfrow = c(1, 1))
+pa <- ggplot(data = df_d1_a1, aes(x = sample_size, y = MSPE)) +
+  geom_line() + geom_point() + 
+  scale_x_continuous(name = "sample size") + ylim(0.0, 0.04) +
+  theme_bw()
+print(pa)
 
 dfa1 <- data.frame(
   sample_size = rep(Sam_N_list[-1], 6),
@@ -298,7 +309,7 @@ dfa1 <- data.frame(
 setEPS()
 postscript("./pics/sim3a2_consist.eps", width = width, height = height)
 par(mfrow = c(1, 1))
-ggplot(data = dfa1, aes(x = sample_size, y = MSPE, group = group)) +
+pb <- ggplot(data = dfa1, aes(x = sample_size, y = MSPE, group = group)) +
   geom_line(aes(linetype = group))+
   geom_point(aes(shape = group)) + 
   scale_shape_discrete(
@@ -325,6 +336,7 @@ ggplot(data = dfa1, aes(x = sample_size, y = MSPE, group = group)) +
              expression(tau[0]^2 ~ "," ~2*sigma[0]^2 ~ "," ~0.5*phi[0]))) +
   scale_x_continuous(name = "sample size") + 
   theme_bw()
+print(pb)
 dev.off()
 
 dfa <- data.frame(
@@ -339,7 +351,7 @@ dfa <- data.frame(
 setEPS()
 postscript("./pics/sim3a2_ratio.eps", width = width, height = height)
 par(mfrow = c(1, 1))
-ggplot(data = dfa, aes(x = sample_size, y = ratio, group = group)) +
+pc <- ggplot(data = dfa, aes(x = sample_size, y = ratio, group = group)) +
   geom_line(aes(linetype = group))+
   geom_point(aes(shape = group)) + 
   scale_shape_discrete(
@@ -364,22 +376,23 @@ ggplot(data = dfa, aes(x = sample_size, y = ratio, group = group)) +
              expression(tau[0]^2 ~ "," ~2*sigma[0]^2 ~ "," ~0.5*phi[0]))) +
   scale_x_continuous(name = "sample size") + 
   theme_bw()
+print(pc)
 dev.off()
 
 
 
 dfb <- data.frame(sample_size = rep(Sam_N_list[-1], 6),
-  ratio = c(data_B_ratio1[-1], data_B_ratio2[-1], data_B_ratio3[-1], 
-            data_B_ratio4[-1], data_B_ratio5[-1], data_B_ratio6[-1]),
-                 group = rep(c("tau, 2phi, 0.5sigma^2", "tau, 0.5phi, 2sigma^2", 
-                               "tau, 1.1phi, 1.1sigma^2", "tau, 0.9phi, 0.9sigma^2", 
-                               "2tau, phi, sigma^2", "0.5tau, phi, sigma^2"), 
-                             each = length(Sam_N_list[-1])))
+                  ratio = c(data_B_ratio1[-1], data_B_ratio2[-1], data_B_ratio3[-1], 
+                            data_B_ratio4[-1], data_B_ratio5[-1], data_B_ratio6[-1]),
+                  group = rep(c("tau, 2phi, 0.5sigma^2", "tau, 0.5phi, 2sigma^2", 
+                                "tau, 1.1phi, 1.1sigma^2", "tau, 0.9phi, 0.9sigma^2", 
+                                "2tau, phi, sigma^2", "0.5tau, phi, sigma^2"), 
+                              each = length(Sam_N_list[-1])))
 
 setEPS()
 postscript("./pics/sim3b2_ratio.eps", width = width, height = height)
 par(mfrow = c(1, 1))
-ggplot(data = dfb, aes(x = sample_size, y = ratio, group = group)) +
+pd <- ggplot(data = dfb, aes(x = sample_size, y = ratio, group = group)) +
   geom_line(aes(linetype = group))+
   geom_point(aes(shape = group)) + 
   scale_shape_discrete(
@@ -406,6 +419,7 @@ ggplot(data = dfb, aes(x = sample_size, y = ratio, group = group)) +
              expression(0.5*tau[0]^2 ~ "," ~sigma[0]^2 ~ "," ~phi[0]))) +
   scale_x_continuous(name = "sample size") + 
   theme_bw()
+print(pd)
 dev.off()
 
 
@@ -419,7 +433,7 @@ dfc <- data.frame(sample_size = rep(Sam_N_list, 3),
 setEPS()
 postscript("./pics/sim3c2_ratio.eps", width = width, height = height)
 par(mfrow = c(1, 1))
-ggplot(data = dfc, aes(x = sample_size, y = ratio, group = group)) +
+p4 <- ggplot(data = dfc, aes(x = sample_size, y = ratio, group = group)) +
   geom_line(aes(linetype = group))+
   geom_point(aes(shape = group)) + 
   scale_shape_discrete(
@@ -434,9 +448,8 @@ ggplot(data = dfc, aes(x = sample_size, y = ratio, group = group)) +
              expression(1.2*phi[0]))) +
   scale_x_continuous(name = "sample size") + 
   theme_bw()
+print(p4)
 dev.off()
-
-
 
 
 png(paste("./pics/sim3c2_ratio.png", sep=""), 
@@ -445,6 +458,25 @@ ggplot(data = dfc, aes(x = sample_size, y = ratio, group = group)) +
   geom_line(aes(linetype = group, color = group))+
   geom_point(aes(shape = group, color = group))
 dev.off()
+
+plots = list()
+plots[[1]] <- pa
+plots[[2]] <- pb
+plots[[3]] <- pc
+plots[[4]] <- pd
+
+
+####### update plots for jrssb #######
+width <- 8.0
+height <- 3.0
+ggsave("./pics/Figure5a.pdf", 
+       plot = pa, width=width, height=height, dpi = 1000)
+ggsave("./pics/Figure5b.pdf", 
+       plot = pb, width=width, height=height, dpi = 1000)
+ggsave("./pics/Figure5c.pdf", 
+       plot = pc, width=width, height=height, dpi = 1000)
+ggsave("./pics/Figure5d.pdf", 
+       plot = pd, width=width, height=height, dpi = 1000)
 
 
 #########
