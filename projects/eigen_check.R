@@ -103,7 +103,9 @@ postscript("./pics/assump_check.eps", width = width, height = height)
 print(p_dim1)
 dev.off()
 
-
+####### update plots for jrssb #######
+ggsave("./pics/Figure1.pdf", 
+       plot = p_dim1, width=width, height=height, dpi = 1000)
 
 ## check d = 2 ##
 d = 2
