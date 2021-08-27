@@ -12,7 +12,7 @@ loglik_chol<- function(X, chol_COV, sigma2){
 
 
 neg_loglik_0.5_profile<- function(phi_delta, X, D, n){
-  # phi_delta: decay and psill / nugget
+  # phi_delta: decay and nugget / psill
   # D: distance matrix
   # X: data
   
@@ -21,8 +21,19 @@ neg_loglik_0.5_profile<- function(phi_delta, X, D, n){
   return(sum(log(diag(chol_COV))) +  0.5 * n * log(sum(u^2) / n))
 }
 
+neg_loglik_0.5_profile_X<- function(phi_delta_beta, X, Y, D, n){
+  # phi_delta: decay and nugget / psill
+  # D: distance matrix
+  # X: data
+  
+  chol_COV = chol(exp(- phi_delta_beta[1] * D) + phi_delta_beta[2] * diag(n)) 
+  mu = Y - X %*% phi_delta_beta[c(-1, -2)]
+  u = forwardsolve(chol_COV, mu, transpose = T, upper.tri = T)
+  return(sum(log(diag(chol_COV))) +  0.5 * n * log(sum(u^2) / n))
+}
+
 neg_loglik_0.5_profile_0nug<- function(phi, X, D, n){
-  # phi_delta: decay and psill / nugget
+  # phi_delta: decay and nugget / psill
   # D: distance matrix
   # X: data
   
@@ -32,7 +43,7 @@ neg_loglik_0.5_profile_0nug<- function(phi, X, D, n){
 }
 
 neg_loglik_0.5_fixphi<- function(delta, phi_fix, X, D, n){
-  # phi_delta: decay and psill / nugget
+  # phi_delta: decay and nugget / psill
   # D: distance matrix
   # X: data
   
