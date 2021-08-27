@@ -112,4 +112,11 @@ print(p_kappa_compar)
 dev.off()
 
 
+####### update plots for jrssb #######
+ggsave("./pics/Figure6a.pdf", 
+       plot = p_tausq_compar, width=width, height=height, dpi = 1000)
+ggsave("./pics/Figure6b.pdf", 
+       plot = p_kappa_compar, width=width, height=height, dpi = 1000)
+
+
 
